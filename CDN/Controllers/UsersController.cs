@@ -18,9 +18,10 @@ public class UsersController : GenericController<UsersController>
     }
 
     [HttpGet]
-    public async Task<IReadOnlyList<UserDto>> GetAll()
+    [HttpGet("page/{page:int}/size/{size:int}")]
+    public async Task<IReadOnlyList<UserDto>> GetAll(int page = 1, int size = 100, string searchText = "")
     {
-        var items = await userService.GetAllAsync();
+        var items = await userService.GetAll(page, size, searchText);
         return mapper.Map<IReadOnlyList<UserDto>>(items);
     }
 

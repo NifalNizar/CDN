@@ -24,4 +24,23 @@ public class UserRepository : GenericRepository<User>, IUserRepository
             .Select(x => x.Username)
             .ToListAsync();
     }
+
+    public async Task<IReadOnlyList<User>> GetAll(int page, int pageSize, string searchText)
+    {
+        if (page == 0) page = 1;
+        if (pageSize == 0) pageSize = int.MaxValue;
+        int skip = (page - 1) * pageSize;
+
+        return await _context.Users
+            .AsNoTracking()
+            .Where(x =>
+                searchText == "" 
+                || x.Username.Contains(searchText)
+                || x.MobileNo.Contains(searchText)
+                || x.EmailAddress!.Contains(searchText)
+            )
+            .OrderByDescending(x => x.Id)
+            .Skip(skip).Take(pageSize)
+            .ToListAsync();
+    }
 }

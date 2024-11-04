@@ -6,4 +6,6 @@ public interface IUserService : IGenericService<User>
     public Task<User?> GetByUsername(string userName);
 
     public Task<List<string>> GetUsernames();
+
+    public Task<IReadOnlyList<User>> GetAll(int page, int pageSize, string searchText);
 }

@@ -36,4 +36,9 @@ public class UserService(IUserRepository UserRepository) : IUserService
     {
         return await _userRepository.GetUsernames();
     }
+
+    public async Task<IReadOnlyList<User>> GetAll(int page, int pageSize, string searchText)
+    {
+        return await _userRepository.GetAll(page, pageSize, searchText);
+    }
 }
