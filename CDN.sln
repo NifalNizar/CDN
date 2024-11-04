@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDN.API", "WebApplication1\CDN.API.csproj", "{20E5BD8D-49B6-4575-8F52-09E71EC11C3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDN.Api", "WebApplication1\CDN.Api.csproj", "{20E5BD8D-49B6-4575-8F52-09E71EC11C3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDN.Application", "CDN.Application\CDN.Application.csproj", "{7A56060E-0ECD-445F-B8CC-965B05957C49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDN.Core", "CDN.Core\CDN.Core.csproj", "{62802ABB-D902-4868-9D47-0042C0392B0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{20E5BD8D-49B6-4575-8F52-09E71EC11C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20E5BD8D-49B6-4575-8F52-09E71EC11C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20E5BD8D-49B6-4575-8F52-09E71EC11C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A56060E-0ECD-445F-B8CC-965B05957C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A56060E-0ECD-445F-B8CC-965B05957C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A56060E-0ECD-445F-B8CC-965B05957C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A56060E-0ECD-445F-B8CC-965B05957C49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62802ABB-D902-4868-9D47-0042C0392B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62802ABB-D902-4868-9D47-0042C0392B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62802ABB-D902-4868-9D47-0042C0392B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62802ABB-D902-4868-9D47-0042C0392B0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
