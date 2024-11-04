@@ -21,4 +21,8 @@
     <ProjectReference Include="..\CDN.Core\CDN.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
 </Project>
