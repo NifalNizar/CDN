@@ -65,4 +65,26 @@ public class UsersController : GenericController<UsersController>
         await userService.UpdateAsync(item);
         return NoContent();
     }
+
+    [AllowAnonymous]
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var item = await userService.GetByIdAsync(id);
+        if (item == null)
+        {
+            return BadRequest("User Not Found");
+        }
+        else if (item.Status == Status.Deleted)
+        {
+            return BadRequest("User Is Deleted");
+        }
+
+        item.Status = Status.Deleted;
+        item.ModifiedBy = 1;
+        item.ModifiedOn = DateTime.UtcNow;
+
+        await userService.UpdateAsync(item);
+        return NoContent();
+    }
 }
