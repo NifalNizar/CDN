@@ -30,7 +30,7 @@ public class UserRepository(CDNContext context) : GenericRepository<User>(contex
         return await _context.Users
             .AsNoTracking()
             .Where(x =>
-                searchText == "" 
+                searchText == ""
                 || x.Username.Contains(searchText)
                 || x.MobileNo.Contains(searchText)
                 || x.EmailAddress!.Contains(searchText)
@@ -47,5 +47,20 @@ public class UserRepository(CDNContext context) : GenericRepository<User>(contex
                         .ToListAsync();
 
         return items;
+    }
+
+    public async Task<bool> IsUsernameExists(int id, string value)
+    {
+        return await _context.Users.AnyAsync(x => x.Id != id && x.Username == value);
+    }
+
+    public async Task<bool> IsMobileNoExists(int id, string value)
+    {
+        return await _context.Users.AnyAsync(x => x.Id != id && x.MobileNo == value);
+    }
+
+    public async Task<bool> IsEmailExists(int id, string value)
+    {
+        return await _context.Users.AnyAsync(x => x.Id != id && x.EmailAddress == value);
     }
 }

@@ -46,4 +46,19 @@ public class UserService(IUserRepository UserRepository) : IUserService
     {
         return await _userRepository.GetAuditById(id);
     }
+
+    public async Task<bool> IsUsernameExists(int id, string value)
+    {
+        return await _userRepository.IsUsernameExists(id, value);
+    }
+
+    public async Task<bool> IsMobileNoExists(int id, string value)
+    {
+        return await _userRepository.IsMobileNoExists(id, value);
+    }
+
+    public async Task<bool> IsEmailExists(int id, string value)
+    {
+        return await _userRepository.IsEmailExists(id, value);
+    }
 }

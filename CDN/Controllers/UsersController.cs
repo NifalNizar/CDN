@@ -4,8 +4,8 @@ using CDN.Core.Constants;
 using CDN.Core.Entities;
 using CDN.Dtos;
 using CDN.Requests;
-using IdentityModel.OidcClient;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.Design;
 
 namespace CDN.Controllers;
 public class UsersController(IMapper mapper, IUserService userService) : GenericController<UsersController>
@@ -49,6 +49,12 @@ public class UsersController(IMapper mapper, IUserService userService) : Generic
     [HttpPost]
     public async Task<IActionResult> Add(UserSaveRequest model)
     {
+        string message = await Validate(0, model.MobileNo, model.EmailAddress, model.Username);
+        if (!string.IsNullOrEmpty(message))
+        {
+            return BadRequest(message);
+        }
+
         var item = new User
         {
             Username = model.Username,
@@ -76,6 +82,11 @@ public class UsersController(IMapper mapper, IUserService userService) : Generic
         else if (item.Status == Status.Deleted)
         {
             return BadRequest("User Is Deleted");
+        }
+        string message = await Validate(id, model.MobileNo, model.EmailAddress, model.Username);
+        if (!string.IsNullOrEmpty(message))
+        {
+            return BadRequest(message);
         }
 
         item.Username = model.Username;
@@ -109,5 +120,25 @@ public class UsersController(IMapper mapper, IUserService userService) : Generic
 
         await userService.UpdateAsync(item);
         return NoContent();
+    }
+
+    private async Task<string> Validate(int id, string mobileNo, string email, string username)
+    {
+        if (await userService.IsMobileNoExists(id, mobileNo))
+        {
+            return "Mobile No Already Exist";
+        }
+
+        if (await userService.IsEmailExists(id, mobileNo))
+        {
+            return "Email Already Exist";
+        }
+
+        if (await userService.IsUsernameExists(id, mobileNo))
+        {
+            return "Username Already Exist";
+        }
+
+        return string.Empty;
     }
 }
