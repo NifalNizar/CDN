@@ -14,6 +14,9 @@ using CDN.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddLog4Net("log4net.config");
+
 builder.Services.AddDbContext<CDNContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

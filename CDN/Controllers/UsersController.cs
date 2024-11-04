@@ -7,15 +7,10 @@ using CDN.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CDN.Controllers;
-public class UsersController : GenericController<UsersController>
+public class UsersController(IMapper mapper, IUserService userService) : GenericController<UsersController>
 {
-    private readonly IMapper mapper;
-    private readonly IUserService userService;
-    public UsersController(IMapper mapper, IUserService userService)
-    {
-        this.mapper = mapper;
-        this.userService = userService;
-    }
+    private readonly IMapper mapper = mapper;
+    private readonly IUserService userService = userService;
 
     [HttpGet]
     [HttpGet("page/{page:int}/size/{size:int}")]
@@ -35,14 +30,16 @@ public class UsersController : GenericController<UsersController>
     [HttpPost]
     public async Task<IActionResult> Add(UserSaveRequest model)
     {
-        var item = new User();
-        item.Username = model.Username;
-        item.EmailAddress = model.EmailAddress;
-        item.MobileNo = model.MobileNo;
-        item.Skills = model.Skills;
-        item.Hobby = model.Hobby;
+        var item = new User
+        {
+            Username = model.Username,
+            EmailAddress = model.EmailAddress,
+            MobileNo = model.MobileNo,
+            Skills = model.Skills,
+            Hobby = model.Hobby,
 
-        item.Status = Status.Active;
+            Status = Status.Active
+        };
         item.CreatedBy = item.Id;
 
         await userService.AddAsync(item);

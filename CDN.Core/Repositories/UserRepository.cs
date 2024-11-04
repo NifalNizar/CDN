@@ -3,13 +3,9 @@ using CDN.Core.IRepositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace CDN.Core.Repositories;
-public class UserRepository : GenericRepository<User>, IUserRepository
+public class UserRepository(CDNContext context) : GenericRepository<User>(context), IUserRepository
 {
-    private readonly CDNContext _context;
-    public UserRepository(CDNContext context) : base(context)
-    {
-        _context = context;
-    }
+    private readonly CDNContext _context = context;
 
     public async Task<User?> GetByUsername(string userName)
     {
