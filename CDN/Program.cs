@@ -11,6 +11,8 @@ using System.Text;
 using AutoMapper;
 using CDN.Helpers;
 using CDN.Middlewares;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,6 +93,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")!, name: "Sql Health");
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -98,6 +101,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//HealthCheck Middleware
+app.MapHealthChecks("health", new HealthCheckOptions { 
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+});
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
