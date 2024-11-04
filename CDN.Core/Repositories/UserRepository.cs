@@ -13,6 +13,15 @@ public class UserRepository : GenericRepository<User>, IUserRepository
 
     public async Task<User?> GetByUsername(string userName)
     {
-        return await _context.Users.FirstOrDefaultAsync(x => x.Username.ToLower() == userName.ToLower());
+        return await _context.Users
+            .FirstOrDefaultAsync(x => x.Username.ToLower() == userName.ToLower());
+    }
+
+    public async Task<List<string>> GetUsernames()
+    {
+        return await _context.Users
+            .AsNoTracking()
+            .Select(x => x.Username)
+            .ToListAsync();
     }
 }

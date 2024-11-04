@@ -24,6 +24,13 @@ public class UsersController : GenericController<UsersController>
         return mapper.Map<IReadOnlyList<UserDto>>(items);
     }
 
+    [HttpGet("Usernames")]
+    public async Task<IActionResult> GetUsernames()
+    {
+        var items = await userService.GetUsernames();
+        return Ok(items);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Add(UserSaveRequest model)
     {

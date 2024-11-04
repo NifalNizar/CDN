@@ -31,4 +31,9 @@ public class UserService(IUserRepository UserRepository) : IUserService
     {
         return await _userRepository.GetByUsername(userName);
     }
+
+    public async Task<List<string>> GetUsernames()
+    {
+        return await _userRepository.GetUsernames();
+    }
 }
