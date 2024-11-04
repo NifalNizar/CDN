@@ -1,6 +1,8 @@
-﻿using CDN.Application.IServices;
+﻿using AutoMapper;
+using CDN.Application.IServices;
 using CDN.Core.Constants;
 using CDN.Core.Entities;
+using CDN.Dtos;
 using CDN.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,18 +10,20 @@ using Microsoft.AspNetCore.Mvc;
 namespace CDN.Controllers;
 public class UsersController : GenericController<UsersController>
 {
+    private readonly IMapper mapper;
     private readonly IUserService userService;
-    public UsersController(IUserService userService)
+    public UsersController(IMapper mapper, IUserService userService)
     {
+        this.mapper = mapper;
         this.userService = userService;
     }
 
     [AllowAnonymous]
     [HttpGet]
-    public async Task<IReadOnlyList<User>> GetAll()
+    public async Task<IReadOnlyList<UserDto>> GetAll()
     {
         var items = await userService.GetAllAsync();
-        return items;
+        return mapper.Map<IReadOnlyList<UserDto>>(items);
     }
 
     [AllowAnonymous]
@@ -37,7 +41,7 @@ public class UsersController : GenericController<UsersController>
         item.CreatedBy = item.Id;
 
         await userService.AddAsync(item);
-        return CreatedAtAction("GetAll", new { id = item.Id }, item);
+        return CreatedAtAction("GetAll", new { id = item.Id }, mapper.Map<UserDto>(item));
     }
 
     [AllowAnonymous]

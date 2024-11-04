@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using AutoMapper;
+using CDN.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,6 +75,10 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+
+var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MapperProfile()); });
+var mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 builder.Services.AddScoped<CDNContext, CDNContext>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
