@@ -1,0 +1,31 @@
+CREATE VIEW [dbo].[UsersView] AS
+SELECT 
+	[CreatedOn],
+	[CreatedBy],
+	[ModifiedOn],
+	[ModifiedBy],
+	[Status],
+	[Id],
+	[Username],
+	[EmailAddress],
+	[MobileNo],
+	[Skills],
+	[Hobby]
+FROM
+	Users
+UNION
+SELECT 
+	[CreatedOn],
+	[CreatedBy],
+	[ModifiedOn],
+	[ModifiedBy],
+	[Status],
+	[Id],
+	[Username],
+	[EmailAddress],
+	[MobileNo],
+	[Skills],
+	[Hobby]
+FROM
+	[AUDIT].Users
+GO
