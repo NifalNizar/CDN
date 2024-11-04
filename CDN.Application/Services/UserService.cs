@@ -26,4 +26,9 @@ public class UserService(IUserRepository UserRepository) : IUserService
     {
         await _userRepository.UpdateAsync(entity);
     }
+
+    public async Task<User?> GetByUsername(string userName)
+    {
+        return await _userRepository.GetByUsername(userName);
+    }
 }

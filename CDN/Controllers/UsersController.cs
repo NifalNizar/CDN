@@ -4,7 +4,6 @@ using CDN.Core.Constants;
 using CDN.Core.Entities;
 using CDN.Dtos;
 using CDN.Requests;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CDN.Controllers;
@@ -18,7 +17,6 @@ public class UsersController : GenericController<UsersController>
         this.userService = userService;
     }
 
-    [AllowAnonymous]
     [HttpGet]
     public async Task<IReadOnlyList<UserDto>> GetAll()
     {
@@ -26,7 +24,6 @@ public class UsersController : GenericController<UsersController>
         return mapper.Map<IReadOnlyList<UserDto>>(items);
     }
 
-    [AllowAnonymous]
     [HttpPost]
     public async Task<IActionResult> Add(UserSaveRequest model)
     {
@@ -44,7 +41,6 @@ public class UsersController : GenericController<UsersController>
         return CreatedAtAction("GetAll", new { id = item.Id }, mapper.Map<UserDto>(item));
     }
 
-    [AllowAnonymous]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UserSaveRequest model)
     {
@@ -70,7 +66,6 @@ public class UsersController : GenericController<UsersController>
         return NoContent();
     }
 
-    [AllowAnonymous]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
