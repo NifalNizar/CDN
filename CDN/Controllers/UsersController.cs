@@ -27,15 +27,42 @@ public class UsersController : GenericController<UsersController>
     public async Task<IActionResult> Add(UserSaveRequest model)
     {
         var item = new User();
-        item.Status = Status.Active;
-        item.CreatedBy = item.Id;
         item.Username = model.Username;
         item.EmailAddress = model.EmailAddress;
         item.MobileNo = model.MobileNo;
         item.Skills = model.Skills;
         item.Hobby = model.Hobby;
 
+        item.Status = Status.Active;
+        item.CreatedBy = item.Id;
+
         await userService.AddAsync(item);
         return CreatedAtAction("GetAll", new { id = item.Id }, item);
+    }
+
+    [AllowAnonymous]
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Update(int id, UserSaveRequest model)
+    {
+        var item = await userService.GetByIdAsync(id);
+        if (item == null)
+        {
+            return BadRequest("User Not Found");
+        }
+        else if (item.Status == Status.Deleted)
+        {
+            return BadRequest("User Is Deleted");
+        }
+
+        item.Username = model.Username;
+        item.EmailAddress = model.EmailAddress;
+        item.MobileNo = model.MobileNo;
+        item.Skills = model.Skills;
+        item.Hobby = model.Hobby;
+        item.ModifiedBy = 1;
+        item.ModifiedOn = DateTime.UtcNow;
+
+        await userService.UpdateAsync(item);
+        return NoContent();
     }
 }
