@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using CDN.Core;
 using CDN.Core.IRepositories;
 using CDN.Core.Repositories;
+using CDN.Application.IServices;
+using CDN.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<CDNContext, CDNContext>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

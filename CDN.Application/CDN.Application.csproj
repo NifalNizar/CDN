@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CDN.Core\CDN.Core.csproj" />
+  </ItemGroup>
+
 </Project>
