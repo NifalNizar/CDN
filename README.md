@@ -53,3 +53,5 @@ You need to login to the system using default user
 **Extra Features**
 1. Audit Table
 2. Audit API to view
+3. Required Attributes to validate the data
+4. When Saving Validate the Username, MobileNo and Email to be unique
