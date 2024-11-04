@@ -74,12 +74,21 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    //Test Policy
+    options.AddPolicy("MyPolicy", policy =>
     {
         policy.AllowAnyHeader()
             .AllowAnyOrigin()
             .AllowAnyMethod();
     });
+
+    //Production Policy
+    //options.AddPolicy("MyPolicy", policy =>
+    //{
+    //    policy.WithOrigins("client-domain.com")
+    //        .WithMethods("GET", "POST", "PUT", "DELETE")
+    //        .WithHeaders("Content-Type");
+    //});
 });
 
 var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MapperProfile()); });
@@ -106,6 +115,8 @@ if (app.Environment.IsDevelopment())
 app.MapHealthChecks("health", new HealthCheckOptions { 
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
 });
+
+app.UseCors("MyPolicy");
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
