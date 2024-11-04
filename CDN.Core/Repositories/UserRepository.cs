@@ -39,4 +39,13 @@ public class UserRepository(CDNContext context) : GenericRepository<User>(contex
             .Skip(skip).Take(pageSize)
             .ToListAsync();
     }
+
+    public async Task<List<User>> GetAuditById(int id)
+    {
+        var items = await _context.Users
+                        .FromSqlInterpolated($"EXEC dbo.GetUserAuditById {id}")
+                        .ToListAsync();
+
+        return items;
+    }
 }

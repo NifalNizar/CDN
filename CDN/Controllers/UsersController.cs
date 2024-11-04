@@ -4,6 +4,7 @@ using CDN.Core.Constants;
 using CDN.Core.Entities;
 using CDN.Dtos;
 using CDN.Requests;
+using IdentityModel.OidcClient;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CDN.Controllers;
@@ -25,6 +26,24 @@ public class UsersController(IMapper mapper, IUserService userService) : Generic
     {
         var items = await userService.GetUsernames();
         return Ok(items);
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var item = await userService.GetByIdAsync(id);
+        if (item == null)
+        {
+            return BadRequest("User Not Found");
+        }
+        return Ok(mapper.Map<UserDto>(item));
+    }
+
+    [HttpGet("{id:int}/Audit")]
+    public async Task<IActionResult> GetAuditById(int id)
+    {
+        var items = await userService.GetAuditById(id);
+        return Ok(mapper.Map<IReadOnlyList<UserAuditDto>>(items));
     }
 
     [HttpPost]

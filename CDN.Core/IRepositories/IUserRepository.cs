@@ -8,4 +8,6 @@ public interface IUserRepository : IGenericRepository<User>
     public Task<List<string>> GetUsernames();
 
     public Task<IReadOnlyList<User>> GetAll(int page, int pageSize, string searchText);
+
+    public Task<List<User>> GetAuditById(int id);
 }

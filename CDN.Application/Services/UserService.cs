@@ -41,4 +41,9 @@ public class UserService(IUserRepository UserRepository) : IUserService
     {
         return await _userRepository.GetAll(page, pageSize, searchText);
     }
+
+    public async Task<List<User>> GetAuditById(int id)
+    {
+        return await _userRepository.GetAuditById(id);
+    }
 }
