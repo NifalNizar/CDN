@@ -1,0 +1,19 @@
+<div class="login-wrapper">
+    <div class="login-inner">
+        <div class="">
+            <form (ngSubmit)="login()">
+                <div class="form-group">
+                    <label for="userName">Username</label>
+                    <input type="text" [(ngModel)]="model.username" [ngModelOptions]="{standalone: true}" class="form-control" id="userName">    
+                </div>
+                <div class="form-group">
+                    <label for="password">Passwod</label>
+                    <input type="password" [(ngModel)]="model.password" [ngModelOptions]="{standalone: true}" class="form-control" id="password">
+                </div>
+                <div class="mt-4">
+                    <button class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
