@@ -18,7 +18,7 @@ import { UsersComponent } from './components/users/users.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot({ positionClass: 'inline' })
+    ToastrModule.forRoot({ positionClass: 'inline' }),
   ],
   providers: [],
   bootstrap: [AppComponent],
