@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, ReplaySubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,13 +15,8 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(model: any) {
-    return this.http
-      .post<string>(this.baseUrl + 'Authentication/Login', model)
-      .pipe(
-        map((token) => {
-          localStorage.setItem('token', JSON.stringify(token));
-          return token;
-        })
-      );
+    return this.http.post(this.baseUrl + 'Authentication/Login', model, {
+      responseType: 'text',
+    });
   }
 }
