@@ -32,7 +32,7 @@ You need to login to the system using default user
 15. Aspect oriented programming - NO
 16. Object oriented programming - YES
 17. Use data mapper - YES
-18. IOption pattern - NO
+18. IOption pattern - YES
 19. In memory cache - NO
 20. Distributed cache - NO
 21. Constant/static variables - YES
