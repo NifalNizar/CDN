@@ -13,6 +13,7 @@ using CDN.Helpers;
 using CDN.Middlewares;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
+using Microsoft.Identity.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,6 +91,10 @@ builder.Services.AddCors(options =>
     //        .WithHeaders("Content-Type");
     //});
 });
+
+builder.Services
+  .AddOptions<JwtOptions>()
+  .Bind(builder.Configuration.GetSection(JwtOptions.Key));
 
 var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MapperProfile()); });
 var mapper = mappingConfig.CreateMapper();
