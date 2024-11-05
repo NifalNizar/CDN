@@ -1,7 +1,11 @@
 **Complete Developer Network**
 
 This is the Sample project Created for build a list of freelancers
-Backend System written in .NET 8 and connected to Sql Server.
+Follwing are technologies used in the development.
+1. .NET 8 API Project
+2. EFCORE code first approach
+3. SQL Server as the RDBMS
+4. Storeced Procedure to get the Audit records
 
 **Getting Started**
 1. Check-out the repository
@@ -32,7 +36,7 @@ You need to login to the system using default user
 15. Aspect oriented programming - NO
 16. Object oriented programming - YES
 17. Use data mapper - YES
-18. IOption pattern - NO
+18. IOption pattern - YES
 19. In memory cache - NO
 20. Distributed cache - NO
 21. Constant/static variables - YES
