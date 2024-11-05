@@ -38,6 +38,7 @@ public class AuthenticationController : GenericController<AuthenticationControll
 
         List<Claim> claims =
         [
+            new(type: "UserId", value: user.Id.ToString()),
             new(ClaimTypes.Name, model.Username),
             new(ClaimTypes.Email, user.EmailAddress),
             new(type: ClaimTypes.GivenName, value: "Nifal"),
